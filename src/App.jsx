@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './App.css'
+import Task from './components/Task';
 
 function App() {
 
@@ -7,7 +8,12 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    setTasks([...tasks, e.target.taskfield.value]);
+    const newTask = {
+      id: tasks.length,
+      taskName: e.target.taskfield.value,
+      status: false
+    }
+    setTasks([...tasks, newTask]);
 
   }
 
@@ -25,11 +31,12 @@ function App() {
       
       <div className='w-64 m-20'>
         <h2 className='text-xl font-bold mb-4'>Tasks:</h2>
-        <ul className='list-disc pl-5'>
+        <div className="">
           {tasks.map((task, index) => (
-            <li key={index} className='mb-2'>{task}</li>
+            // <li key={index} className='mb-2'>{task.taskName}</li>
+            <Task key={index} t={task} />
           ))}
-        </ul>
+        </div>
 
       </div>
     </div>
