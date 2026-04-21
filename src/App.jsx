@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import Task from './components/Task';
 
@@ -13,9 +13,23 @@ function App() {
       taskName: e.target.taskfield.value,
       status: false
     }
-    setTasks([...tasks, newTask]);
-
+    const newTaskArray = [...tasks, newTask];
+    setTasks(newTaskArray);
+    saveToLocalStorage(newTaskArray);
   }
+
+  
+
+  function saveToLocalStorage(taskArray){
+    localStorage.setItem("tasks", JSON.stringify(taskArray));
+  }
+
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    if(savedTasks){
+      setTasks(JSON.parse(savedTasks));
+    }
+  }, [])
 
   return (
     <div className='w-full h-full'>
