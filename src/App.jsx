@@ -22,10 +22,16 @@ function App() {
     console.log('Task with id', id)
     const newTaskArray = tasks.map((t) => {
       if(t.id === id){
-        return {...t, status: true}
+        return {...t, status: !t.status}
       }
       return t;
     })
+    setTasks(newTaskArray);
+    saveToLocalStorage(newTaskArray);
+  }
+
+  function deleteTask(id){
+    const  newTaskArray = tasks.filter((t) => t.id !== id);
     setTasks(newTaskArray);
     saveToLocalStorage(newTaskArray);
   }
@@ -71,7 +77,7 @@ function App() {
         <div className="">
           {sortTasksBasedonStatus().map((task, index) => (
             // <li key={index} className='mb-2'>{task.taskName}</li>
-            <Task key={index} t={task} doneFunction={markTaskDone}/>
+            <Task key={index} t={task} doneFunction={markTaskDone} deleteFunction={deleteTask} />
           ))}
         </div>
 
