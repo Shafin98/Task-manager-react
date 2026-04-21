@@ -17,8 +17,18 @@ function App() {
     setTasks(newTaskArray);
     saveToLocalStorage(newTaskArray);
   }
-
   
+  function markTaskDone(id){
+    console.log('Task with id', id)
+    const newTaskArray = tasks.map((t) => {
+      if(t.id === id){
+        return {...t, status: true}
+      }
+      return t;
+    })
+    setTasks(newTaskArray);
+    saveToLocalStorage(newTaskArray);
+  }
 
   function saveToLocalStorage(taskArray){
     localStorage.setItem("tasks", JSON.stringify(taskArray));
@@ -48,7 +58,7 @@ function App() {
         <div className="">
           {tasks.map((task, index) => (
             // <li key={index} className='mb-2'>{task.taskName}</li>
-            <Task key={index} t={task} />
+            <Task key={index} t={task} doneFunction={markTaskDone}/>
           ))}
         </div>
 
