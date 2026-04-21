@@ -41,6 +41,19 @@ function App() {
     }
   }, [])
 
+  function sortTasksBasedonStatus(){
+    const sortedTasks = [...tasks].sort((a, b) => {
+      if(a.status === b.status){
+        return 0;
+      }
+      if(a.status){
+        return 1;
+      }
+      return -1;
+    })
+    return sortedTasks
+  }
+
   return (
     <div className='w-full h-full'>
       <form onSubmit={handleSubmit} className='w-64 m-20'>
@@ -56,7 +69,7 @@ function App() {
       <div className='w-64 m-20'>
         <h2 className='text-xl font-bold mb-4'>Tasks:</h2>
         <div className="">
-          {tasks.map((task, index) => (
+          {sortTasksBasedonStatus().map((task, index) => (
             // <li key={index} className='mb-2'>{task.taskName}</li>
             <Task key={index} t={task} doneFunction={markTaskDone}/>
           ))}
