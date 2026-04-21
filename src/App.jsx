@@ -11,6 +11,7 @@ function App() {
     const newTask = {
       id: tasks.length,
       taskName: e.target.taskfield.value,
+      taskDetails: e.target.taskDetails.value,
       status: false
     }
     const newTaskArray = [...tasks, newTask];
@@ -67,6 +68,12 @@ function App() {
           type="text"
           name='taskfield'
           placeholder='Enter your text'
+          className='border border-gray-300 rounded-md p-2 mb-4 w-full'
+        />
+        <input 
+          type="text"
+          name='taskDetails'
+          placeholder='Details'
           className='border border-gray-300 rounded-md p-2 mb-4 w-full'
         />
         <button className='bg-blue-500 text-white p-2 rounded-md' >Add Task</button>
